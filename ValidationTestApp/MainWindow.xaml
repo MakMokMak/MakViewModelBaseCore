@@ -1,0 +1,113 @@
+﻿<Window x:Class="ValidationTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ValidationTestApp"
+        xmlns:vm="clr-namespace:ValidationTestApp.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="800" SizeToContent="Height"
+        FocusManager.FocusedElement="{Binding ElementName=TitleBox}">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <!-- エラー項目の ! 表記用の設定　ここから -->
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter
+                        Property="ToolTip"
+                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- エラー項目の ! 表記用の設定　ここまで -->
+    </Window.Resources>
+
+    <StackPanel>
+        <TextBlock
+            Text="入力データ検証のテスト" FontSize="24"
+            HorizontalAlignment="Center" Margin="20" />
+        <DataGrid
+            ItemsSource="{Binding Memos}" Margin="10" MaxHeight="200"
+            IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
+        <GroupBox Header="入力" FontSize="18" HorizontalAlignment="Center">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBox" x:Key="ErrorText">
+                        <Setter Property="Foreground" Value="Red" />
+                    </Style>
+
+                    <DataTemplate DataType="{x:Type ValidationError}">
+                        <TextBlock FontStyle="Italic" Foreground="Red" HorizontalAlignment="Right" Margin="0,1"
+                           Text="{Binding Path=ErrorContent}" FontSize="14" />
+                    </DataTemplate>
+                </StackPanel.Resources>
+                <StackPanel Orientation="Horizontal">
+                    <Label
+                        Name="LabelTitle" Content="タイトル:" FontSize="18" />
+                    <TextBox
+                        Name="TitleBox" MinWidth="300"
+                        FontSize="18" Text="{Binding Title, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" />
+                    <ListBox
+                        ItemsSource="{Binding ElementName=TitleBox, Path=(Validation.Errors)}"
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="本文:" FontSize="18" Width="{Binding ElementName=LabelTitle, Path=ActualWidth}" />
+                    <TextBox
+                        Name="NoteBox" MinWidth="300"
+                        FontSize="18" AcceptsReturn="True" 
+                        Text="{Binding Note, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" TextWrapping="WrapWithOverflow"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"
+                        MaxHeight="100" VerticalScrollBarVisibility="Auto" />
+                    <ListBox
+                        ItemsSource="{Binding ElementName=NoteBox, Path=(Validation.Errors)}"
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="年齢:" FontSize="18" Width="{Binding ElementName=LabelTitle, Path=ActualWidth}" />
+                    <TextBox
+                        Name="AgeBox" MinWidth="100" FontSize="18" Text="{Binding StrAge, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" />
+                    <ListBox
+                        ItemsSource="{Binding ElementName=AgeBox, Path=(Validation.Errors)}"
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None" />
+                </StackPanel>
+                <CheckBox Content="オプション" IsChecked="{Binding Option}" VerticalContentAlignment="Center" Margin="80 10" />
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Option}">
+                    <Label Content="備考" FontSize="18" Width="{Binding ElementName=LabelTitle, Path=ActualWidth}" />
+                    <TextBox
+                        Name="RemarkBox" MinWidth="300" FontSize="18" Text="{Binding Remark, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" />
+                    <ListBox
+                        ItemsSource="{Binding ElementName=RemarkBox, Path=(Validation.Errors)}"
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None" />
+                </StackPanel>
+                <CheckBox Content="オプション" IsChecked="{Binding Option2}" VerticalContentAlignment="Center" Margin="80 10" />
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Option2}">
+                    <Label Content="備考" FontSize="18" Width="{Binding ElementName=LabelTitle, Path=ActualWidth}" />
+                    <TextBox
+                        Name="RemarkBox2" MinWidth="300" FontSize="18" Text="{Binding Remark2, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" />
+                    <ListBox
+                        ItemsSource="{Binding ElementName=RemarkBox2, Path=(Validation.Errors)}"
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None" />
+                </StackPanel>
+                <Button
+                    Content="追加" FontSize="18" Command="{Binding AddMemoComamnd}" Margin="5 10" />
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</Window>
