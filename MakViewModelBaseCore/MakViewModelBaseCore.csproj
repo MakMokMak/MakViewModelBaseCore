@@ -5,6 +5,11 @@
     <RootNamespace>MakCraft</RootNamespace>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <PackageId>MakCraft.MakViewModelBaseCore</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>MakCraft</Authors>
+    <Copyright>Copyright 2020 MakCraft</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
