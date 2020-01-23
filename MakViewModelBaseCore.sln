@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakViewModelBaseCore", "Mak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakViewModelBaseCoreTest", "MakViewModelBaseCoreTest\MakViewModelBaseCoreTest.csproj", "{A488E08A-778D-43CA-BCC9-391E5F760778}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelBaseTestApp", "ViewModelBaseTestApp\ViewModelBaseTestApp.csproj", "{3AA1B5CC-9B27-4312-8C96-56C38DE63702}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A488E08A-778D-43CA-BCC9-391E5F760778}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A488E08A-778D-43CA-BCC9-391E5F760778}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A488E08A-778D-43CA-BCC9-391E5F760778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AA1B5CC-9B27-4312-8C96-56C38DE63702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AA1B5CC-9B27-4312-8C96-56C38DE63702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AA1B5CC-9B27-4312-8C96-56C38DE63702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AA1B5CC-9B27-4312-8C96-56C38DE63702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
