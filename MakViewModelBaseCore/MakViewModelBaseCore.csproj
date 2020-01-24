@@ -16,4 +16,8 @@
     <DocumentationFile>$(ProjectDir)\bin\Release\netcoreapp3.1\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+  </ItemGroup>
+
 </Project>
