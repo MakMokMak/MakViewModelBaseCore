@@ -1,0 +1,36 @@
+﻿<Window x:Class="TransitionTestApp.MultipleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mb="clr-namespace:MakCraft.Behaviors;assembly=MakViewModelBaseCore"
+        xmlns:vm="clr-namespace:TransitionTestApp.ViewModels"
+        xmlns:local="clr-namespace:TransitionTestApp"
+        mc:Ignorable="d"
+        Title="MultipleWindow" Height="300" Width="300">
+    <Window.DataContext>
+        <vm:MultipleWindowViewModel />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <mb:EventCommandAction Command="{Binding CheckCanCloseCommand}" />
+        </i:EventTrigger>
+        <i:PropertyChangedTrigger Binding="{Binding MessageDialogActionParam}">
+            <mb:MessageDialogAction
+                Parameter="{Binding MessageDialogActionParam}"
+                ActionCallBack="{Binding MessageDialogActionCallback}" />
+        </i:PropertyChangedTrigger>
+        <i:PropertyChangedTrigger Binding="{Binding DisplayMode}">
+            <mb:DisplayModeAction DisplayMode="{Binding DisplayMode}" />
+        </i:PropertyChangedTrigger>
+    </i:Interaction.Triggers>
+
+    <StackPanel>
+        <TextBlock Text="複数表示ウィンドウ(遷移しない)" FontSize="18" HorizontalAlignment="Center" Margin="8" />
+
+        <Button Content="ウィンドウ クローズの可否を変更" Command="{Binding ChangeClosableCommand}" Margin="8" />
+
+        <Button Content="閉じる" Command="{Binding WindowCloseCommand}" Margin="8" />
+    </StackPanel>
+</Window>

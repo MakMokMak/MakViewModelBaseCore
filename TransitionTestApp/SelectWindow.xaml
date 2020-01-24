@@ -1,0 +1,35 @@
+﻿<Window x:Class="TransitionTestApp.SelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mb="clr-namespace:MakCraft.Behaviors;assembly=MakViewModelBaseCore"
+        xmlns:vm="clr-namespace:TransitionTestApp.ViewModels"
+        xmlns:local="clr-namespace:TransitionTestApp"
+        mc:Ignorable="d"
+        Title="SelectWindow" SizeToContent="WidthAndHeight">
+    <Window.DataContext>
+        <vm:SelectWindowViewModel />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:PropertyChangedTrigger Binding="{Binding DisplayMode}">
+            <mb:DisplayModeAction DisplayMode="{Binding DisplayMode}" />
+        </i:PropertyChangedTrigger>
+
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding WindowClosedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="選択ウィンドウ" HorizontalAlignment="Center" FontSize="18" Margin="8" />
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" MinWidth="80" Margin="4" Command="{Binding CompleteCommand}" />
+            <Button Content="Cancel" MinWidth="80" Margin="4" Command="{Binding WindowCloseCommand}" />
+        </StackPanel>
+
+        <ComboBox DockPanel.Dock="Bottom" Margin="4" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" />
+    </DockPanel>
+</Window>

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModelBaseTestApp", "Vie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeakEventViewModelBaseTestApp", "WeakEventViewModelBaseTestApp\WeakEventViewModelBaseTestApp.csproj", "{D8B1C713-5B25-46A6-986C-53EF199A12B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationTestApp", "ValidationTestApp\ValidationTestApp.csproj", "{59B8980B-172E-4A50-A73D-85BAF18EEB96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidationTestApp", "ValidationTestApp\ValidationTestApp.csproj", "{59B8980B-172E-4A50-A73D-85BAF18EEB96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionTestApp", "TransitionTestApp\TransitionTestApp.csproj", "{E3051074-6935-4C93-908F-B46FAFAD2F01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{59B8980B-172E-4A50-A73D-85BAF18EEB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B8980B-172E-4A50-A73D-85BAF18EEB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B8980B-172E-4A50-A73D-85BAF18EEB96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3051074-6935-4C93-908F-B46FAFAD2F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3051074-6935-4C93-908F-B46FAFAD2F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3051074-6935-4C93-908F-B46FAFAD2F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3051074-6935-4C93-908F-B46FAFAD2F01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
