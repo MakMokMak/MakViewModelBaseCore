@@ -1,0 +1,52 @@
+﻿<Window x:Class="MultiMonitorUtilTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mb="clr-namespace:MakCraft.Behaviors;assembly=MakViewModelBaseCore"
+        xmlns:vm="clr-namespace:MultiMonitorUtilTestApp.ViewModels"
+        xmlns:local="clr-namespace:MultiMonitorUtilTestApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="{Binding Height,Mode=TwoWay}" Width="{Binding Width,Mode=TwoWay}"
+        Top="{Binding Top,Mode=TwoWay}" Left="{Binding Left,Mode=TwoWay}">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <i:Interaction.Behaviors>
+        <mb:MultiMonitorUtilBehavior
+            IMutiMonitorUtil="{Binding MultiMonitorUtil,Mode=OneWayToSource}"
+            OnSourceInitializedCommand="{Binding OnSourceInitializedCommand}"
+            OnDisplaySettingsChangedCommand="{Binding OnDisplaySettingChangedCommand}" />
+    </i:Interaction.Behaviors>
+
+
+    <StackPanel>
+        <TextBlock
+            FontSize="18" HorizontalAlignment="Center" Margin="8" Text="マルチモニター ユーティリティのテスト" />
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock
+                FontSize="12" Margin="4" Text="座標:" />
+            <TextBox
+                FontSize="12" Margin="4" IsReadOnly="True"
+                MaxHeight="40" MinHeight="10" MaxWidth="450" MinWidth="450" TextWrapping="Wrap"
+                HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                Text="{Binding TextPosition}" />
+        </StackPanel>
+
+        <Button
+            Margin="4" Padding="10 4" Content="仮想クローズボタン" Command="{Binding VirtualCloseCommand}" />
+
+        <Button
+            Margin="4" Padding="10 4" Content="仮想表示ボタン" Command="{Binding VirtualOpenCommand}" />
+
+        <TextBlock
+            Margin="4" Text="{Binding TextNotice}" />
+
+        <Button
+            Margin="4" Padding="40 4" Content="表示範囲内チェック(_K)" Command="{Binding IsRangeCommand}" />
+        <TextBlock
+            Margin="4" />
+    </StackPanel>
+</Window>
