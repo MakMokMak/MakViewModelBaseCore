@@ -6,30 +6,49 @@
         xmlns:local="clr-namespace:WeakEventViewModelBaseTestApp"
         xmlns:vm="clr-namespace:WeakEventViewModelBaseTestApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
-
     <StackPanel>
-        <TextBlock Text="弱いイベント・パターンを利用したサービスからのプロパティ変更通知のテスト"
-                   HorizontalAlignment="Center" Margin="10"/>
-        <StackPanel Margin="10">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="データ件数:" />
-                <TextBlock Text="{Binding BooksCount}" VerticalAlignment="Center" MinWidth="20" />
-            </StackPanel>
-            <DataGrid Name="BooksGrid" ItemsSource="{Binding Books}" AutoGenerateColumns="False"
-                      IsReadOnly="True" HorizontalAlignment="Center">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Title}" Header="書名" />
-                    <DataGridTextColumn Binding="{Binding Author}" Header="著者" />
-                    <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0:N0}円}" Header="価格" />
-                    <DataGridTextColumn Binding="{Binding Feature}" Header="特色" />
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button Content="追加" Padding="10 6" Command="{Binding AddBookCommand}"
-                    Margin="10" Width="{Binding ElementName=BooksGrid, Path=ActualWidth}"/>
-        </StackPanel>
+        <TextBlock
+            Text="Item 表示" FontSize="24" Margin="10" HorizontalAlignment="Center" />
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0" Grid.Column="0"
+                Text="Item01" FontSize="16" Margin="10,5" />
+            <TextBlock
+                Grid.Row="0" Grid.Column="1"
+                Text="{Binding Item01}" FontSize="16" Margin="10,5" />
+            <TextBlock
+                Grid.Row="1" Grid.Column="0"
+                Text="Item02" FontSize="16" Margin="10,5" />
+            <TextBlock
+                Grid.Row="1" Grid.Column="1"
+                Text="{Binding Item02}" FontSize="16" Margin="10,5" />
+            <DataGrid
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                ItemsSource="{Binding SampleModels}" FontSize="16"
+                IsReadOnly="True" Margin="10" />
+            <Button
+                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="編集" Margin="10" Padding="20,5"
+                FontSize="16" Command="{Binding ShowEditWindowCommand}" />
+            <Button
+                Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="GC 実行" Margin="10" Padding="20,5"
+                FontSize="16" Command="{Binding GcCommand}" />
+        </Grid>
     </StackPanel>
 </Window>

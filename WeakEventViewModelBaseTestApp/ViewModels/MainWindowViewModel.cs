@@ -1,63 +1,127 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using MakCraft.ViewModels;
 using WeakEventViewModelBaseTestApp.Models;
 using WeakEventViewModelBaseTestApp.Services;
+using MakCraft.ViewModels;
 
 namespace WeakEventViewModelBaseTestApp.ViewModels
 {
-    class MainWindowViewModel : WeakEventViewModelBase
+    internal class MainWindowViewModel : WeakEventViewModelBase
     {
-        private readonly IBookService _service;
-        private readonly IPropertyChangedWeakEventListener _listener;
+        private readonly IItemService _itemService;
 
-        public MainWindowViewModel() : this(new BookService(), new PropertyChangedWeakEventListener()) { }
-        public MainWindowViewModel(IBookService service, IPropertyChangedWeakEventListener listener)
+        public MainWindowViewModel() : this(ItemService.GetInstance()) { }
+        public MainWindowViewModel(IItemService itemService)
         {
-            _service = service;
-            _listener = listener;
-            _listener.WeakPropertyChanged += OnWeakListenerPropertyChanged;
-            base.AddListener(_service, _listener);
+            _itemService = itemService;
+            PropertyChangedEventManager.AddListener(_itemService, this, nameof(IItemService.Item01));
+            PropertyChangedEventManager.AddListener(_itemService, this, nameof(IItemService.Item02));
         }
 
-        public int BooksCount
+        private string _item01;
+        public string Item01
         {
-            get { return _service.Count; }
+            get => _item01;
+            set => base.SetProperty(ref _item01, value);
         }
 
-        public List<Book> Books
+        private string _item02;
+        public string Item02
         {
-            get { return _service.Books; }
+            get => _item02;
+            set => SetProperty(ref _item02, value);
         }
 
-        private void AddBookCommandExecute()
+        public ObservableCollection<SampleModel> SampleModels
         {
-            var book = new Book
+            get => _itemService.SampleModels;
+        }
+
+        protected override void OnReceivedPropertyChangeNotification(Type managerType, object sender, EventArgs e)
+        {
+            // PropertyChangedEventManager からのイベント通知であることを確認
+            if (managerType != typeof(PropertyChangedEventManager))
             {
-                Id = 0,
-                Title = "くまの本",
-                Author = "森のくまさん",
-                Price = 1600,
-                Feature = "森のくまさんの生活を描いた自信作"
-            };
-            _service.AddBook(book);
-        }
-        private ICommand _addBookCommand;
-        public ICommand AddBookCommand
-        {
-            get
+                return;
+            }
+
+            // イベントソースが IItemService であることを確認
+            if (!(sender is IItemService service))
             {
-                if (_addBookCommand == null)
-                    _addBookCommand = new RelayCommand(AddBookCommandExecute);
-                return _addBookCommand;
+                return;
+            }
+
+            // PropertyChangedEventArgs であることを確認
+            if (!(e is PropertyChangedEventArgs eventArgs))
+            {
+                return;
+            }
+            string newValue;
+            switch (eventArgs.PropertyName)
+            {
+                case nameof(IItemService.Item01):
+                    newValue = service.Item01;
+                    if (_item01 != newValue)
+                    {
+                        Item01 = newValue;
+                    }
+                    break;
+                case nameof(IItemService.Item02):
+                    newValue = service.Item02;
+                    if (_item02 != newValue)
+                    {
+                        Item02 = newValue;
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException(eventArgs.PropertyName);
             }
         }
 
-        private void OnWeakListenerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ShowEditWindowExecute()
         {
-            base.RaisePropertyChanged(nameof(BooksCount));
-            base.RaisePropertyChanged(nameof(Books));
+            var window = new ModalWindow01();
+            window.ShowDialog();
+        }
+        private ICommand _showEditWindowCommand;
+        public ICommand ShowEditWindowCommand
+        {
+            get
+            {
+                if (_showEditWindowCommand == null)
+                {
+                    _showEditWindowCommand = new RelayCommand(ShowEditWindowExecute);
+                }
+                return _showEditWindowCommand;
+            }
+        }
+
+        private void GcExecute()
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            System.GC.Collect();
+            Mouse.OverrideCursor = null;
+        }
+        private ICommand _gcCommand;
+        public ICommand GcCommand
+        {
+            get
+            {
+                if (_gcCommand == null)
+                {
+                    _gcCommand = new RelayCommand(GcExecute);
+                }
+                return _gcCommand;
+            }
+        }
+
+        ~MainWindowViewModel()
+        {
+            System.Diagnostics.Debug.WriteLine($"[{DateTime.Now}] Destruct MainWindowViewModel.");
         }
     }
 }
