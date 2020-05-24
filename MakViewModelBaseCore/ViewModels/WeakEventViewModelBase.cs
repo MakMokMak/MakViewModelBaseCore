@@ -1,43 +1,43 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Windows;
 
 namespace MakCraft.ViewModels
 {
     /// <summary>
-    /// 弱いイベントパターンを用いたリスナー登録機能を持つビューモデルベースです。
+    /// IWeakEventListener インターフェイスを実装したビューモデルベースです。
     /// </summary>
-    public abstract class WeakEventViewModelBase : ViewModelBase
+    public abstract class WeakEventViewModelBase : ViewModelBase, IWeakEventListener
     {
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public WeakEventViewModelBase() { }
 
+        #region IWeakEventListener
+
         /// <summary>
-        /// PropertyChangedEventManager へ弱いイベントのリスナーを登録します。
+        /// イベント マネージャーからイベントを受信します。
         /// </summary>
-        /// <param name="notifyObject">WeakPropertyChanged を発火するオブジェクト</param>
-        /// <param name="weakEventListener">弱いイベントの発火を待ち受けるオブジェクト</param>
-        public void AddListener(INotifyPropertyChanged notifyObject, IWeakEventListener weakEventListener)
+        /// <param name="managerType"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
         {
-            PropertyChangedEventManager.AddListener(
-                notifyObject,
-                weakEventListener,
-                string.Empty);
+            // PropertyChangedEvent を受信したときの処理を行う。
+            OnReceivedPropertyChangeNotification(managerType, sender, e);
+
+            return true;
         }
 
         /// <summary>
-        /// PropertyChangedEventManager から弱いイベントのリスナーを削除します。
-        /// (明示的に削除を行わなくてもメモリーリークは発生しません)
+        /// PropertyChangedEvent を受信したときに実行する仮想メソッドです。
         /// </summary>
-        /// <param name="notifyObject">WeakPropertyChanged を発火するオブジェクト</param>
-        /// <param name="weakEventListener">弱いイベントの発火を待ち受けるオブジェクト</param>
-        public void RemoveListener(INotifyPropertyChanged notifyObject, IWeakEventListener weakEventListener)
-        {
-            PropertyChangedEventManager.RemoveListener(
-                notifyObject,
-                weakEventListener,
-                string.Empty);
-        }
+        /// <param name="managerType"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected virtual void OnReceivedPropertyChangeNotification(Type managerType, object sender, EventArgs e) { }
+
+        #endregion
     }
 }
