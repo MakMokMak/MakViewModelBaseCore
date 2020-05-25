@@ -1,2 +1,5 @@
+Version 1.1.0 2020/5/25
+WeakEventViewModelBase クラスの実装を見直し、不要となった ViewModel のインスタンスがスムーズに破棄されるようにした。
+
 Version 1.0.0 2020/2/01
 .NET Core をターゲットに NuGet へパッケージを公開
