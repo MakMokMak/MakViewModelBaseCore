@@ -15,9 +15,9 @@ WPF(.NET Core) を利用した MVVM なシステム作成に利用できる View
 それぞれの ViewModelBase の利用例は、ソリューション中の次のプロジェクトをご覧ください。
 
 * ViewModelBase: ViewModelBaseTestApp
-* WeakEventViewModelBase: WeakEventViewModelBaseTestApp
+* WeakEventViewModelBase: WeakEventViewModelBaseTestApp, AppSettingsSample
 * ValidationViewModelBase: ValidationTestApp
-* TransitionViewModelBase: TransitionTestApp
+* TransitionViewModelBase: TransitionTestApp, AppSettingsSample
 ## プロジェクトへの導入
 [NuGet Pachage](https://www.nuget.org/packages/MakCraft.MakViewModelBaseCore/) をご利用ください。
 ## 更新履歴
