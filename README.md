@@ -19,6 +19,6 @@ WPF(.NET Core) を利用した MVVM なシステム作成に利用できる View
 * ValidationViewModelBase: ValidationTestApp
 * TransitionViewModelBase: TransitionTestApp, AppSettingsSample
 ## プロジェクトへの導入
-[NuGet Pachage](https://www.nuget.org/packages/MakCraft.MakViewModelBaseCore/) をご利用ください。
+[NuGet Package](https://www.nuget.org/packages/MakCraft.MakViewModelBaseCore/) をご利用ください。
 ## 更新履歴
 [blog をご覧ください](http://www.makcraft.com/blog/meditation/category/viewmodelbase/)
