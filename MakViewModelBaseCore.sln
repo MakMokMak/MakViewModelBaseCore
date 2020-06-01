@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidationTestApp", "Valida
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransitionTestApp", "TransitionTestApp\TransitionTestApp.csproj", "{E3051074-6935-4C93-908F-B46FAFAD2F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiMonitorUtilTestApp", "MultiMonitorUtilTestApp\MultiMonitorUtilTestApp.csproj", "{4C0E98B5-684B-45EB-8D1B-3B2EFAF7B156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMonitorUtilTestApp", "MultiMonitorUtilTestApp\MultiMonitorUtilTestApp.csproj", "{4C0E98B5-684B-45EB-8D1B-3B2EFAF7B156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSettingsSample", "AppSettingsSample\AppSettingsSample.csproj", "{46FA437D-09C6-4046-81DF-3660FBBB9E61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4C0E98B5-684B-45EB-8D1B-3B2EFAF7B156}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0E98B5-684B-45EB-8D1B-3B2EFAF7B156}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0E98B5-684B-45EB-8D1B-3B2EFAF7B156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FA437D-09C6-4046-81DF-3660FBBB9E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FA437D-09C6-4046-81DF-3660FBBB9E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FA437D-09C6-4046-81DF-3660FBBB9E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FA437D-09C6-4046-81DF-3660FBBB9E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
