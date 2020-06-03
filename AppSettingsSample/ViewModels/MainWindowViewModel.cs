@@ -20,7 +20,7 @@ namespace AppSettingsSample.ViewModels
         }
 
         /// <summary>
-        /// PropertyChangedEvent を受信したときに実行する仮想メソッドです。
+        /// PropertyChangedEvent を受信したときに実行する仮想メソッドをオーバーライドします。
         /// </summary>
         /// <param name="managerType"></param>
         /// <param name="sender"></param>
