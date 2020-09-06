@@ -40,7 +40,7 @@ namespace WeakEventViewModelBaseTestApp.ViewModels
 
         public ObservableCollection<SampleModel> SampleModels => _itemService.SampleModels;
 
-        protected override void OnReceivedPropertyChangeNotification(Type managerType, object sender, EventArgs e)
+        protected override void OnReceiveWeakEventNotification(Type managerType, object sender, EventArgs e)
         {
             // PropertyChangedEventManager からのイベント通知であることを確認
             if (managerType != typeof(PropertyChangedEventManager))
