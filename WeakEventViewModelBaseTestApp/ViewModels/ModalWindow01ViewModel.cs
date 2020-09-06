@@ -40,24 +40,24 @@ namespace WeakEventViewModelBaseTestApp.ViewModels
 
         public ObservableCollection<SampleModel> SampleModels => _itemService.SampleModels;
 
-        protected override void OnReceiveWeakEventNotification(Type managerType, object sender, EventArgs e)
+        protected override bool OnReceiveWeakEventNotification(Type managerType, object sender, EventArgs e)
         {
             // PropertyChangedEventManager からのイベント通知であることを確認
             if (managerType != typeof(PropertyChangedEventManager))
             {
-                return;
+                return false;
             }
 
             // イベントソースが IItemService であることを確認
             if (!(sender is IItemService service))
             {
-                return;
+                return false;
             }
 
             // PropertyChangedEventArgs であることを確認
             if (!(e is PropertyChangedEventArgs eventArgs))
             {
-                return;
+                return false;
             }
 
             string newValue;
@@ -80,6 +80,8 @@ namespace WeakEventViewModelBaseTestApp.ViewModels
                 default:
                     throw new NotImplementedException(eventArgs.PropertyName);
             }
+
+            return true;
         }
 
         #region Edit Item
