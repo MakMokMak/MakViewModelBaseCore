@@ -1,3 +1,7 @@
+Version 1.2.0 2020/9/7
+WeakEventViewModelBase.OnReceiveWeakEventNotification メソッドを追加した。(イベント マネージャーからイベントを受信したときに実行する仮想メソッドであることを明確にするため新設した。)
+WeakEventViewModelBase.OnReceivedPropertyChangeNotification メソッドへ Obsolete 属性を付与した。
+
 Version 1.1.0 2020/5/25
 WeakEventViewModelBase クラスの実装を見直し、不要となった ViewModel のインスタンスがスムーズに破棄されるようにした。
 
